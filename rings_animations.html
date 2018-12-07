@@ -1,0 +1,117 @@
+<html>
+Enter the time interval between 1-10
+<input type="number" id="a" />
+<input id="b1" type="button" value="right" onclick="myStopFunction1();" />
+<input id="b2" type="button" value="left" onclick="myStopFunction2();"/>
+
+
+</html>
+<center><canvas id="c1" width=600 height=600> </canvas>
+
+<script>
+function myStopFunction1() {
+    clearTimeout(time1);
+    clearTimeout(time2);
+    drawolym();
+}
+
+function myStopFunction2() {
+    clearTimeout(time2);
+    clearTimeout(time1);
+    leftdrawolym();
+}
+
+
+
+
+var time1;
+var time2;
+   document.getElementById("a").defaultValue = 2;
+    var X = 75, W = 50, G = 20
+    
+    var colors = [ ['blue', 'yellow', 'black', 'green', 'red'],
+                   ['red', 'blue', 'yellow', 'black', 'green'],
+                   ['green', 'red', 'blue', 'yellow', 'black'],
+                   ['black', 'green', 'red', 'blue', 'yellow'] ]
+    
+    var args = [
+        [X,X,W],
+        [X+W+W+G,X,W],
+        [X+W+W+G+W+W+G,X,W],
+        [X+W+G/2,X+W,W],
+        [X+W+G/2+W+W+G,X+W,W]]
+        var i=0
+        
+function drawolym(){
+  var x = document.getElementById('a').value;
+    var temp=x+''+'000';
+   x=parseInt(temp,10);
+
+  console.log(x);
+    bo = c1.getContext('2d') 
+   if (i==3){
+        i=0;
+    }
+    else{
+        i++;
+    }
+     bo.lineWidth = 10
+     z=0;
+      console.log(i)
+    while (z<5) {
+        bo.strokeStyle = colors[i][z]
+        bo.beginPath()
+        bo.arc.apply(bo, args[z].concat([0,Math.PI*2,true]))
+        bo.stroke()
+        z++;
+    }
+     
+  
+
+    time1=setTimeout("drawolym()", x)
+}
+
+c=3
+function leftdrawolym(){
+  
+ var sec = document.getElementById('a').value;
+    var temp=sec+''+'000';
+   sec=parseInt(temp,10);
+
+  console.log(sec);
+    bo = c1.getContext('2d') 
+   if (c==0){
+        c=3;
+    }
+    else{
+        c--;
+    }
+     bo.lineWidth = 10
+     v=4;
+      console.log(c)
+    while (v>=0) {
+        bo.strokeStyle = colors[c][v]
+        
+        bo.beginPath()
+        bo.arc.apply(bo, args[v].concat([0,Math.PI*2,true]))
+        bo.stroke()
+        v--;
+    }
+     
+  
+
+
+
+  time2=setTimeout("leftdrawolym()", sec)
+}
+
+window.onload = drawolym;
+
+
+
+//drawolymn()
+
+
+
+
+</script>
